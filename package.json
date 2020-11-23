@@ -1,0 +1,69 @@
+{
+  "name": "vue-dropbox-chooser",
+  "version": "0.1.1",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build-bundle": "vue-cli-service build --target lib --name vue-dropbox-chooser ./src/components/index.js",
+    "lint": "vue-cli-service lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Feniksss/vue-dropbox-chooser"
+  },
+  "keywords": [
+    "vue",
+    "google",
+    "files",
+    "picker",
+    "chooser"
+  ],
+  "author": "Sergey Vdovin <feniksss@gmail.com> (http://github.com/Feniksss)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Feniksss/vue-dropbox-chooser/issues"
+  },
+  "homepage": "https://github.com/Feniksss/vue-dropbox-chooser",
+  "dependencies": {
+    "load-script": "^1.0.0",
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.8.0",
+    "@vue/cli-plugin-eslint": "^3.8.0",
+    "@vue/cli-service": "^3.8.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ],
+  "main": "./dist/vue-dropbox-chooser.common.js",
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}

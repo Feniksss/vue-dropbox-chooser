@@ -75,11 +75,11 @@ export default {
             attachments.push(attachment);
           }
           this.tempAttachments = attachments;
-          console.log(this.tempAttachments);
+          this.$emit('picked', this.tempAttachments);
         },
 
         cancel: function () {
-          console.log('cancel');
+          this.$emit('cancel')
         },
 
         linkType   : this.linkType,

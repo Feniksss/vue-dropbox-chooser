@@ -1,7 +1,11 @@
 <template>
-  <div v-if="scriptLoaded && dropboxChooserIsSupported" @click="dropboxIconClicked">
+  <div v-if="scriptLoaded && dropboxChooserIsSupported && (buttonType == 'chooser')" @click="dropboxIconClicked">
     <slot/>
     <button v-if="!this.$slots.default">Open dropbox picker</button>
+  </div>
+  <div v-if="scriptLoaded && dropboxChooserIsSupported && (buttonType == 'saver')" @click="dropboxSaverIconClicked">
+    <slot/>
+    <button v-if="!this.$slots.default">Save to Dropbox</button>
   </div>
 </template>
 
@@ -34,7 +38,17 @@ export default {
     sizeLimit   : {
       type   : Number,
       default: 0
-    }
+    },
+    buttonType  : {
+      type   : String,
+      default: 'chooser'
+    },
+    uploadFiles : {
+      type   : Array,
+      default: function () {
+        return [];
+      }
+    },
   },
   data   : () => ({
     scriptLoaded             : false,
@@ -82,8 +96,8 @@ export default {
           this.$emit('cancel')
         },
 
-        linkType   : this.linkType,
-        multiselect: this.multiselect,
+        linkType    : this.linkType,
+        multiselect : this.multiselect,
         folderselect: this.folderselect,
       }
       if (this.extensions.length) {
@@ -94,6 +108,31 @@ export default {
         options.sizeLimit = this.sizeLimit
       }
       window.Dropbox.choose(options);
+    },
+    dropboxSaverIconClicked() {
+      let options = {
+        files   : this.uploadFiles,
+        success : function () {
+          this.$emit('saved');
+        },
+        cancel  : function () {
+          this.$emit('cancel')
+        },
+        progress: function (progress) {
+          this.$emit('progress', {'progress': progress})
+        },
+        error   : function (errorMessage) {
+          this.$emit('error', {'errorMessage': errorMessage})
+        },
+      }
+      if (this.extensions.length) {
+        options.extensions = this.extensions
+      }
+
+      if (this.sizeLimit) {
+        options.sizeLimit = this.sizeLimit
+      }
+      window.Dropbox.save(options);
     }
   }
 }
